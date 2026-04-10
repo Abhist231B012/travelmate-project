@@ -1,4 +1,4 @@
-# 🧠 TravelAround AI — Intelligent Group Travel Planning Platform
+# 🧠 travelmate-project — Intelligent Group Travel Planning Platform
 
 <div align="center">
 
@@ -19,11 +19,11 @@
 
 ---
 
-## 🌟 Why TravelAround AI?
+## 🌟 Why travelmate-project?
 
 Group travel planning is chaotic — different preferences, budgets, schedules, and endless WhatsApp messages 😵‍💫.
 
-**TravelAround AI fixes this.**
+**travelmate-project fixes this.**
 
 It acts as a **smart travel coordinator** that listens to everyone, thinks intelligently, and delivers a plan that works for the whole group.
 
@@ -49,11 +49,11 @@ Planning a group trip usually means:
 * Budget confusion
 * Poor coordination
 
-### ❌ Traditional Approach
+### ❌ travelmate-project Approach
 
 Manual planning, spreadsheets, and guesswork.
 
-### ✅ TravelAround AI Approach
+### ✅ travelmate-project Approach
 
 AI-driven planning with clarity, collaboration, and confidence.
 
@@ -87,8 +87,7 @@ AI-driven planning with clarity, collaboration, and confidence.
 
 ```bash
 # Clone repository
-git clone https://github.com/vikash0064/TravelAround.Ai.git
-cd TravelAround.Ai
+cd travelmate-project
 
 # Backend setup
 cd backend
@@ -123,7 +122,7 @@ npm start
 ## 🏗️ Project Architecture
 
 ```text
-TravelAround.Ai/
+travelmate-project/
 ├── backend/        # Node.js + Express + MongoDB
 ├── frontend/       # React Application
 ├── docs/           # Documentation
@@ -192,39 +191,6 @@ OPENAI_API_KEY=your_openai_key
 JWT_SECRET=your_secret
 ```
 
----
-
-## 🧪 Testing
-
-* Backend: Jest / Supertest (planned)
-* Frontend: React Testing Library (planned)
-
----
-
-## 🚀 Deployment
-
-Supported platforms:
-
-* Render (Full Stack)
-* Vercel (Frontend)
-* Railway / Cyclic (Backend)
-
-📘 See `docs/DEPLOYMENT.md` for details.
-
----
-
-## 📁 Project Report
-
-📄 **INT222 Project Report** included:
-
-* System architecture
-* Use case diagrams
-* AI logic explanation
-* Results & screenshots
-
-File: `ReportINT222.pdf`
-
----
 
 ## 🧠 Future Scope
 
@@ -233,29 +199,6 @@ File: `ReportINT222.pdf`
 * Map-based planning
 * Multilingual AI assistant
 * Mobile app version
-
----
-
-## 🤝 Contributing
-
-We welcome contributions!
-
-1. Fork the repo
-2. Create your feature branch
-3. Commit changes
-4. Open a Pull Request
-
----
-
-## 👥 Team
-
-* **Vikash Kushwaha** — Full Stack Developer
-
----
-
-## 📄 License
-
-This project is licensed under the **MIT License**.
 
 ---
 
