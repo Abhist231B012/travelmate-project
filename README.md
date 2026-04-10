@@ -2,7 +2,7 @@
 
 <div align="center">
 
-![TravelAround AI](https://img.shields.io/badge/TravelAround-AI-blue)
+![travelmate-project](https://img.shields.io/badge/TravelAround-AI-blue)
 ![MERN Stack](https://img.shields.io/badge/Stack-MERN-green)
 ![Node.js](https://img.shields.io/badge/Node.js-18.x-brightgreen)
 ![React](https://img.shields.io/badge/React-18.x-61dafb)
