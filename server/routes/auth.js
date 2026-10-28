@@ -139,9 +139,16 @@ router.post("/login", async (req, res) => {
             isVerified: user.isVerified
         };
 
-        res.status(200).json({
-            message: "Login successful",
-            user: { id: user._id, username: user.username, role: user.role, isVerified: user.isVerified }
+        // Persist the session before responding so the cookie is valid immediately
+        req.session.save((err) => {
+            if (err) {
+                console.error("[AUTH_LOGIN] Session save failed:", err);
+                return res.status(500).json({ message: "Could not create session" });
+            }
+            res.status(200).json({
+                message: "Login successful",
+                user: { id: user._id, username: user.username, role: user.role, isVerified: user.isVerified }
+            });
         });
 
     } catch (err) {

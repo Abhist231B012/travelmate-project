@@ -38,7 +38,7 @@ function Header() {
             });
             setSocket(newSocket);
 
-            newSocket.on(`notification_${user.id}`, (newNotif) => {
+            newSocket.on("notification_new", (newNotif) => {
                 setNotifications(prev => [newNotif, ...prev]);
                 toast({
                     title: "New Notification",

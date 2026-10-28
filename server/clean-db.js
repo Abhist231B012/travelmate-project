@@ -1,12 +1,15 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
 import User from "./models/User.js";
 import Trip from "./models/Trip.js";
 import Booking from "./models/Booking.js";
 import Message from "./models/Message.js";
 import Notification from "./models/Notification.js";
 
-dotenv.config({ path: "./server/.env" });
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+dotenv.config({ path: path.join(__dirname, ".env") });
 
 const cleanDatabase = async () => {
     try {

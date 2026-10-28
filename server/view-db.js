@@ -1,9 +1,12 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv";
+import path from "path";
+import { fileURLToPath } from "url";
 import User from "./models/User.js";
 import Trip from "./models/Trip.js";
 
-dotenv.config({ path: "./server/.env" });
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+dotenv.config({ path: path.join(__dirname, ".env") });
 
 const viewData = async () => {
     try {

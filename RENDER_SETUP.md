@@ -2,7 +2,7 @@
 
 Since `.env` files are private and **ignored by Git** (they don't get uploaded to GitHub for security), you need to manually set your secrets on the Render website.
 
-## ✅ Steps to Add JWT_SECRET (and others)
+## ✅ Steps to Add MONGO_URI, SESSION_SECRET (and others)
 
 1.  **Open Render Dashboard**: Go to [https://dashboard.render.com/](https://dashboard.render.com/)
 2.  **Select Your Service**: Click on your project/service name in the list.
@@ -12,9 +12,11 @@ Since `.env` files are private and **ignored by Git** (they don't get uploaded t
 
     | Key | Value | Note |
     | :--- | :--- | :--- |
-    | `JWT_SECRET` | `your_jwt_secret_key_change_this_later` | **REQUIRED** to fix the warning/login |
-    | `MONGO_URI` | `mongodb+srv://...` | **REQUIRED** (Do not use localhost!) |
-    | `VITE_GOOGLE_PLACES_API_KEY` | (Copy from `client/.env.local`) | Required for Maps/Places |
+    | `MONGO_URI` | `mongodb+srv://...` | **REQUIRED** (do not use localhost on Render) |
+    | `SESSION_SECRET` | `your_long_random_secret` | **REQUIRED** for persistent sessions |
+    | `NODE_ENV` | `production` | Enables secure cross-site cookies |
+    | `CLIENT_URL` | `https://your-app.onrender.com` | Only needed if the frontend is hosted on a different origin |
+    | `VITE_GOOGLE_GEMINI_AI_API_KEY` | (from `client/.env`) | Build-time frontend variable for AI itineraries |
 
 6.  **Save**: Click **"Save Changes"**.
 7.  **Done!**: Render will automatically restart your server with the new settings.

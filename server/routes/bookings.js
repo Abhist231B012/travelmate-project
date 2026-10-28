@@ -61,7 +61,7 @@ router.post("/join", verifyToken, async (req, res) => {
                     link: `/organiser`
                 });
                 await notif.save();
-                if (io) io.to(`user_${trip.userId}`).emit("new_notification", notif);
+                if (io) io.to(`user_${trip.userId}`).emit("notification_new", notif);
             }
         }
 

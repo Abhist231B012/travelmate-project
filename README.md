@@ -76,9 +76,9 @@ AI-driven planning with clarity, collaboration, and confidence.
 ### 🔧 Prerequisites
 
 * Node.js **v18+**
-* MongoDB **v6+**
-* npm / yarn
-* OpenAI API Key (for AI features)
+* MongoDB **v6+** (local install or a MongoDB Atlas connection string)
+* npm
+* Google Gemini API Key (optional — AI falls back to offline grouping without it)
 
 ---
 
@@ -89,12 +89,18 @@ AI-driven planning with clarity, collaboration, and confidence.
 cd travelmate-project
 
 # Backend setup
-cd backend
+cd server
 npm install
 
 # Frontend setup
-cd ../frontend
+cd ../client
 npm install
+```
+
+Or install everything from the repo root:
+
+```bash
+npm run install-all
 ```
 
 ---
@@ -102,19 +108,29 @@ npm install
 ## ▶️ Running the App
 
 ```bash
-# Terminal 1: Start Backend
-cd backend
+# Terminal 1: Start Backend (http://localhost:5000)
+cd server
 npm run dev
 ```
 
 ```bash
-# Terminal 2: Start Frontend
-cd frontend
-npm start
+# Terminal 2: Start Frontend (http://localhost:5173)
+cd client
+npm run dev
 ```
 
-📍 Frontend: [http://localhost:3000](http://localhost:3000)
+You can also run both together from the repo root:
+
+```bash
+npm run dev
+```
+
+📍 Frontend: [http://localhost:5173](http://localhost:5173)
 📍 Backend: [http://localhost:5000](http://localhost:5000)
+📍 Health check: [http://localhost:5000/api/health](http://localhost:5000/api/health)
+
+> The backend must have a working `MONGO_URI` for login, trips, bookings and chat.
+> Production build: `npm run build` then `npm start` (serves `client/dist` from the server).
 
 ---
 
@@ -122,12 +138,11 @@ npm start
 
 ```text
 travelmate-project/
-├── backend/        # Node.js + Express + MongoDB
-├── frontend/       # React Application
-├── docs/           # Documentation
-├── ReportINT222.pdf
+├── client/         # React + Vite frontend
+├── server/         # Node.js + Express + MongoDB backend
+├── .github/        # GitHub Actions
 ├── README.md
-└── LICENSE
+└── package.json    # Root scripts (dev, build, start)
 ```
 
 
@@ -181,14 +196,46 @@ travelmate-project/
 
 ## 🔐 Environment Variables
 
-Create a `.env` file in the backend folder:
+Copy the example files and fill in the values:
+
+```bash
+copy server\.env.example server\.env
+copy client\.env.example client\.env
+```
+
+### Server — `server/.env`
 
 ```env
 PORT=5000
-MONGO_URI=your_mongodb_uri
-OPENAI_API_KEY=your_openai_key
-JWT_SECRET=your_secret
+NODE_ENV=development
+
+# Local MongoDB
+MONGO_URI=mongodb://127.0.0.1:27017/travel-around
+# Or MongoDB Atlas
+# MONGO_URI=mongodb+srv://<user>:<password>@<cluster>.mongodb.net/travel-around
+
+# Required: long random string (sessions are stored in MongoDB)
+SESSION_SECRET=replace_with_a_long_random_string
+
+# Optional: extra allowed frontend origins for CORS (comma separated)
+CLIENT_URL=
 ```
+
+### Client — `client/.env`
+
+```env
+# Optional. Without it the itinerary falls back to offline grouping.
+VITE_GOOGLE_GEMINI_AI_API_KEY=your_gemini_api_key
+VITE_GEMINI_MODEL=gemini-2.0-flash
+
+# Optional
+VITE_GOOGLE_PLACES_API_KEY=
+```
+
+> **Note:** This project uses Google Gemini (not OpenAI) and cookie-based sessions
+> (not JWT). `JWT_SECRET` / `OPENAI_API_KEY` from old docs are no longer used.
+> API keys prefixed with `VITE_` are bundled into the frontend and should not be
+> treated as server secrets.
 
 
 ## 🧠 Future Scope

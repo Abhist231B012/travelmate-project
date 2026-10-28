@@ -30,7 +30,7 @@ router.get("/join-requests", verifyOrganiser, async (req, res) => {
             .sort({ createdAt: -1 });
 
         // Filter out any bookings where tripId populate failed (orphaned or deleted trips)
-        const validRequests = requests.filter(req => req.tripId);
+        const validRequests = requests.filter(request => request.tripId);
 
         res.json(validRequests);
     } catch (err) {
@@ -45,6 +45,10 @@ router.put("/requests/:id/validate", verifyOrganiser, async (req, res) => {
         const booking = await Booking.findById(req.params.id).populate('tripId');
 
         if (!booking) return res.status(404).json({ message: "Request not found" });
+
+        if (!booking.tripId) {
+            return res.status(400).json({ message: "This request is not linked to a trip" });
+        }
 
         // Security check: Does this booking belong to a trip owned by the current user?
         if (booking.tripId.userId.toString() !== req.user.id) {

@@ -2,7 +2,9 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import axios from 'axios';
 
-const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GOOGLE_GEMINI_AI_API_KEY);
+const GEMINI_API_KEY = import.meta.env.VITE_GOOGLE_GEMINI_AI_API_KEY;
+const GEMINI_MODEL = import.meta.env.VITE_GEMINI_MODEL || "gemini-2.0-flash";
+const genAI = GEMINI_API_KEY ? new GoogleGenerativeAI(GEMINI_API_KEY) : null;
 
 // --- 1. ENHANCED Geocoding (with place type details) ---
 async function geocodeLocation(location) {
@@ -321,8 +323,11 @@ async function createSmartItinerary(places, hotels, days, location, traveler, bu
   `;
 
   try {
-    // UPDATED MODEL NAME
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    if (!genAI) {
+      console.warn("VITE_GOOGLE_GEMINI_AI_API_KEY is not set. Using offline itinerary grouping.");
+      return defaultItineraryGrouping(places, days, location);
+    }
+    const model = genAI.getGenerativeModel({ model: GEMINI_MODEL });
     const result = await model.generateContent(prompt);
     let text = result.response.text();
 

@@ -82,11 +82,12 @@ router.post("/favorites/:tripId", verifyToken, async (req, res) => {
         const user = await User.findById(req.user.id);
         if (!user) return res.status(404).json({ message: "[USERS] User not found" });
 
-        const index = user.favorites.indexOf(tripId);
-        if (index > -1) {
-            user.favorites.splice(index, 1); // Remove if exists
+        // favorites contains ObjectIds, so a strict string comparison is required
+        const exists = user.favorites.some(id => id.toString() === tripId);
+        if (exists) {
+            user.favorites = user.favorites.filter(id => id.toString() !== tripId);
         } else {
-            user.favorites.push(tripId); // Add if doesn't
+            user.favorites.push(tripId);
         }
 
         await user.save();
